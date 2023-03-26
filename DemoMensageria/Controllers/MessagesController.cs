@@ -42,7 +42,12 @@ namespace DemoMensageria.Controllers
                     var stringMessage = JsonSerializer.Serialize(sendMessageInputModel);
                     var byteArray = Encoding.UTF8.GetBytes(stringMessage);
 
-            
+                    channel.BasicPublish(
+                            exchange: "",
+                            routingKey: QUEUE_NAME,
+                            basicProperties: null,
+                            body: byteArray
+                        );
 
                 }
             }
