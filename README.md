@@ -1,2 +1,2 @@
 # demo-mensageria-dotNet
-Exemplo de utilização de mensageria com .net 5 e rabbitMQ
+Exemplo de utilização de mensageria (lado publisher) com .net 5 e rabbitMQ
