@@ -1,6 +1,8 @@
 ﻿using DemoMensageria.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
+using System.Text;
+using System.Text.Json;
 
 namespace DemoMensageria.Controllers
 {
@@ -35,6 +37,12 @@ namespace DemoMensageria.Controllers
                             autoDelete: false,
                             arguments: null
                             );
+
+                    // Formatar os dados para envio p/ a fila.
+                    var stringMessage = JsonSerializer.Serialize(sendMessageInputModel);
+                    var byteArray = Encoding.UTF8.GetBytes(stringMessage);
+
+            
 
                 }
             }
