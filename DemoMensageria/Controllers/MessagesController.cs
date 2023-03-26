@@ -27,7 +27,7 @@ namespace DemoMensageria.Controllers
 
             using (var connection = _factory.CreateConnection())
             {
-                using(var channel = connection.CreateModel())
+                using (var channel = connection.CreateModel())
                 {
                     // Declara a fila para que caso ela não exista ainda, eu crio ela.
                     channel.QueueDeclare(
@@ -47,12 +47,12 @@ namespace DemoMensageria.Controllers
                             routingKey: QUEUE_NAME,
                             basicProperties: null,
                             body: byteArray
-                        );
+                            );
 
                 }
             }
 
-            return Ok();
+            return Accepted();
         }
 
     }
