@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DemoMensageria.InputModels;
+using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 
 namespace DemoMensageria.Controllers
@@ -16,5 +17,30 @@ namespace DemoMensageria.Controllers
                 HostName = "localhost"
             };
         }
+
+
+        [HttpPost]
+        public IActionResult SendMessage([FromBody] SendMessageInputModel sendMessageInputModel)
+        {
+
+            using (var connection = _factory.CreateConnection())
+            {
+                using(var channel = connection.CreateModel())
+                {
+                    // Declara a fila para que caso ela não exista ainda, eu crio ela.
+                    channel.QueueDeclare(
+                            queue: QUEUE_NAME,
+                            durable: false,
+                            exclusive: false,
+                            autoDelete: false,
+                            arguments: null
+                            );
+
+                }
+            }
+
+            return Ok();
+        }
+
     }
 }
